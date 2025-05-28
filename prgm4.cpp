@@ -1,40 +1,23 @@
 #include <iostream>
 using namespace std;
 
-
-class Camera
+class Car 
 {
 public:
-    void takePhoto()
+    string model;
+    Car(string model)
     {
-        cout << "Taking photo..." << endl;
+        this->model = model;
     }
-};
-
-
-class Phone
-{
-public:
-    void makeCall()
+    void show()
     {
-        cout << "Making call..." << endl;
-    }
-};
-
-class SmartPhone : public Camera, public Phone
-{
-public:
-    void browseInternet()
-    {
-        cout << "Browsing interner..." << endl;
+        cout << "Car model: " << this->model << endl;
     }
 };
 
 int main()
 {
-    SmartPhone sp;
-    sp.takePhoto();
-    sp.makeCall();
-    sp.browseInternet();
+    Car c("Toyata");
+    c.show();
     return 0;
 }

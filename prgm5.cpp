@@ -1,42 +1,31 @@
 #include <iostream>
 using namespace std;
 
-class Animal
+class Product
 {
+private:
+    string name;
+    double price;
+
 public:
-    void breathe()
+    Product(string name, double price)
     {
-        cout << "Animal breathing..." << endl;
+        this->name = name;
+        this->price = price;
     }
-};
-
-
-class Mamal : public Animal
-{
-public:
-    void feedMilk()
+    void display()
     {
-        cout << "Mammal feeding milk to babies." << endl;
-    }
-};
-
-
-class Dog : public Mamal
-{
-public:
-    void bark()
-    {
-        cout << "Dog barking!" << endl;
+        cout << "Product:" << this->name <<", Price $" << this->price << endl;
     }
 };
 
 int main()
 {
-    Dog d;
-    d.breathe();
-    d.feedMilk();
-    d.bark();
+    Product p1("Laptop", 999.99);
+    Product p2("Smartphone", 499.49);
+
+    p1.display();
+    p2.display();
+
     return 0;
-
-
 }

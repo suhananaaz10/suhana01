@@ -1,41 +1,68 @@
 #include <iostream>
 using namespace std;
 
- class Shape
- {
+class Product
+{
+private:
+    string name;
+    double price;
+    double discount;
+
 public:
-    void setColor(string c)
+    Product(string name, double price)
     {
-        cout << "String color:" << c << endl;
+        this->name = name;
+        this->price = price;
+        this->discount = 0.0;
     }
- };
 
-
- class Circle : public Shape 
- {
-public:
-    void drawCircle()
+    Product &setDiscount(double percent)
     {
-        cout << "Drwaing Circle." << endl;
+        this->discount = percent;
+        return *this;
     }
- };
-
- class Rectangle : public Shape
- {
-public:
-    void drawRectangle()
+    
+    double getFinalPrice() const
     {
-        cout << "Drawing Rectangle." << endl;
+        return price - (price * discount / 100.0);
     }
- };
 
- int main()
- {
-    Circle c;
-    Rectangle r;
-    c.setColor("pink");
-    c.drawCircle();
-    r.setColor("blue");
-    r.drawRectangle();
+    bool operator>(const Product &other) const
+    {
+        return this->getFinalPrice() > other.getFinalPrice();
+    }
+
+    void show() const
+    {
+        cout << "Product:" << name
+            << ", Original Price: $ " << price
+            << ",Disount:" << discount << "%"
+            << ", Final Price: $"<< getFinalPrice()
+            << endl;
+    }
+};
+
+int main()
+{
+    Product laptop("Laptop", 1200.00);
+    Product tablet("Tablet", 900.00);
+
+    laptop.setDiscount(15).show();
+    tablet.setDiscount(5).show();
+
+    if (laptop > tablet)
+    {
+        cout << laptop.getFinalPrice() << " is more expensive than " << tablet.getFinalPrice() << endl;
+
+    }
+    else
+    {
+        cout << tablet.getFinalPrice() << " is more expensive than " << laptop.getFinalPrice() << endl;
+
+    }
+
     return 0;
- }
+
+    
+    
+}

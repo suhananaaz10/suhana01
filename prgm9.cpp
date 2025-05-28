@@ -1,28 +1,46 @@
 #include <iostream>
+#include <string>
+#include <map>
 using namespace std;
-class BankAccount
-{
-protected:
-    double balance;
 
-public:
-    void setBalance(double b)
-    {
-        balance = b;
-    }
+struct Employee {
+    string name;
+    string shift;
 };
-class SavingAccount : public BankAccount
-{
-public:
-    void showBalance()
-    {
-        cout << "Balance is: $" << balance << endl;
+
+int main() {
+    int numEmployees;
+
+    cout << "Enter the number of employees checked in today: ";
+    cin >> numEmployees;
+    cin.ignore(); 
+
+    Employee* employees = new Employee[numEmployees];
+
+    for (int i = 0; i < numEmployees; ++i) {
+        cout << "\nEnter name of employee #" << (i + 1) << ": ";
+        getline(cin, employees[i].name);
+
+        cout << "Enter shift (Morning/Afternoon/Night) for " << employees[i].name << ": ";
+        getline(cin, employees[i].shift);
     }
-};
-int main()
-{
-    SavingAccount acc;
-    acc.setBalance(1000.50);
-    acc.showBalance();
+
+    cout << "\n--- Employee List ---\n";
+    for (int i = 0; i < numEmployees; ++i) {
+        cout << "Name: " << employees[i].name << ", Shift: " << employees[i].shift << endl;
+    }
+
+    map<string, int> shiftCount;
+    for (int i = 0; i < numEmployees; ++i) {
+        shiftCount[employees[i].shift]++;
+    }
+
+    cout << "\n--- Shift Summary ---\n";
+    for (const auto& pair : shiftCount) {
+        cout << "Shift: " << pair.first << ", Employees: " << pair.second << endl;
+    }
+
+    delete[] employees;
+
     return 0;
 }
