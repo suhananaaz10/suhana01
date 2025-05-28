@@ -1,31 +1,35 @@
 #include <iostream>
+#include <string>
 using namespace std;
-class Animal
+
+class Vehicle
 {
+private:
+    string model;
+    int year;
+
 public:
-    Animal()
+    Vehicle(string m, int y)
     {
-        cout << "Animal constructor called." << endl;
+        model = m;
+        year = y;
     }
-    ~Animal()
+    void show()
     {
-        cout << "Animal destructor called." << endl;
+        cout << "Model: " << model << ", Year: " << year << endl;
     }
 };
-class Dog : public Animal
-{
-public:
-    Dog()
-    {
-        cout << "Dog constructor called." << endl;
-    }
-    ~Dog()
-    {
-        cout << "Dog destructor called." << endl;
-    }
-};
+
 int main()
 {
-    Dog d;
+    Vehicle *v1 = new Vehicle("Toyata Carry", 2022);
+    Vehicle *v2 = new Vehicle("Testa Model 3", 2023);
+
+    v1->show();
+    v2->show();
+
+    delete v1;
+    delete v2;
+
     return 0;
 }
